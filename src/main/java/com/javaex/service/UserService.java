@@ -39,9 +39,9 @@ public class UserService {
 	public int userModify(UserVo userVo) {
 
 		int count = userDao.updateUser(userVo);
-
+		
 		return count;
-
+		
 	}
 
 }

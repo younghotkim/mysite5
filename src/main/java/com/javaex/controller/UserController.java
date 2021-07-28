@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
 
@@ -117,6 +116,10 @@ public class UserController {
 	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
 
 		System.out.println("[UserController.modify()]");
+
+		int no = ((UserVo) session.getAttribute("authUser")).getNo();
+
+		userVo.setNo(no);
 
 		int count = userService.userModify(userVo);
 

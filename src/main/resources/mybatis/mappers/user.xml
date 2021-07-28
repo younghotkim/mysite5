@@ -18,7 +18,7 @@
 
 	<select id="selectUserModify" parameterType="int" resultType="com.javaex.vo.UserVo">
 		<![CDATA[
-			SELECT no, id, password, name, sex
+			SELECT id, password, name, sex
 			FROM users
 			WHERE no = #{no}
 		]]>
