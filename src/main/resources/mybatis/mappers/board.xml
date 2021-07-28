@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<!-- 조회수 올리기 -->
+
+	<update id="updateHit" parameterType="int">
+		<![CDATA[
+			UPDATE board
+			SET hit = hit + 1
+			WHERE no = #{no}
+		]]>
+	</update>
+
+	<!-- 게시판 정보 1개 가져오기 -->
+
+	<select id="selectBoard" parameterType="int" resultType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			SELECT u.name,
+				   hit,
+				   to_char(b.reg_date,'YY-MM-DD HH24:MI') reg_date,
+				   title,
+				   content,
+				   b.user_no
+			  FROM  board b, users u
+			  WHERE b.user_no = u.no
+			  AND   b.no = #{no}
+		]]>
+
+
+	</select>
+
+	<!-- 게시판 리스트 불러오기 -->
+
+	<select id="selectList" parameterType="String" resultType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			SELECT b.no,
+				   title,
+				   u.name,
+				   hit,
+				   b.user_no,
+				   to_char(b.reg_date,'YY-MM-DD HH24:MI') reg_date
+			  FROM  board b, users u
+			  WHERE b.user_no = u.no
+			  ]]>
+
+		<choose>
+			<when test=" value != null and value !='' ">		  
+			<![CDATA[
+			  AND (title || u.name) like '%' || #{keyword} || '%'
+			]]>
+			</when>
+
+			<otherwise>
+			  <![CDATA[
+			  ORDER by b.no desc
+			  ]]>
+			</otherwise>
+		</choose>
+	</select>
+
+
+
+
+
+</mapper>
