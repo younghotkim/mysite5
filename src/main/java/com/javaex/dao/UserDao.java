@@ -8,24 +8,32 @@ import com.javaex.vo.UserVo;
 
 @Repository
 public class UserDao {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	public UserVo selectUser(UserVo userVo) {
-		
-		System.out.println("[UserDao.selectUser()]");
-		
+
 		return sqlSession.selectOne("user.selectUser", userVo);
-		
+
 	}
-	
+
+	public UserVo selectUser(int no) {
+
+		return sqlSession.selectOne("user.selectUserModify", no);
+
+	}
+
 	public int insertUser(UserVo userVo) {
-		
-		System.out.println("[UserDao.insertUser()]");
-		
+
 		return sqlSession.insert("user.insertUser", userVo);
-		
+
 	}
-	
+
+	public int updateUser(UserVo userVo) {
+
+		return sqlSession.update("user.updateUser", userVo);
+
+	}
+
 }

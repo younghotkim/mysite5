@@ -8,30 +8,40 @@ import com.javaex.vo.UserVo;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	private UserDao userDao;
-	
-	//로그인 사용자 정보 가져오기
-	
+
+	// 로그인 사용자 정보 가져오기
+
 	public UserVo getUser(UserVo userVo) {
-		
-		System.out.println("[UserService.getUser()]");
-		
+
 		UserVo authUser = userDao.selectUser(userVo);
-		
+
 		return authUser;
-		
+
 	}
-	
+
+	public UserVo getUser(int no) {
+
+		return userDao.selectUser(no);
+
+	}
+
 	public int userJoin(UserVo userVo) {
-		
-		System.out.println("[UserService.userJoin()]");
-		
+
 		int count = userDao.insertUser(userVo);
-		
+
 		return count;
-		
+
+	}
+
+	public int userModify(UserVo userVo) {
+
+		int count = userDao.updateUser(userVo);
+
+		return count;
+
 	}
 
 }
