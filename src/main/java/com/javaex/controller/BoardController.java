@@ -62,5 +62,10 @@ public class BoardController {
 		return "board/wirteForm";
 		
 	}
+	
+	//write
+	
+	//delete
+	
 
 }
